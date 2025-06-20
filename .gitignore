@@ -1,0 +1,10 @@
+/.idea/
+/.mvn/
+/data/
+/xiaomi-app/target/
+/xiaomi-domain/target/
+/xiaomi-infrastructure/target/
+/xiaomi-trigger/target/
+/xiaomi-types/target/
+/xiaomi-api/target/
+/docs

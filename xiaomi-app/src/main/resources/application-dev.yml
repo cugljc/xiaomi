@@ -1,0 +1,96 @@
+server:
+  port: 8091
+
+# 线程池配置
+thread:
+  pool:
+    executor:
+      config:
+        core-pool-size: 20
+        max-pool-size: 50
+        keep-alive-time: 5000
+        block-queue-size: 5000
+        policy: CallerRunsPolicy
+
+# 数据库配置；启动时配置数据库资源信息
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://117.72.48.54:13307/company?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+  hikari:
+    pool-name: Retail_HikariCP
+    minimum-idle: 15 #最小空闲连接数量
+    idle-timeout: 180000 #空闲连接存活最大时间，默认600000（10分钟）
+    maximum-pool-size: 25 #连接池最大连接数，默认是10
+    auto-commit: true  #此属性控制从池返回的连接的默认自动提交行为,默认值：true
+    max-lifetime: 1800000 #此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+    connection-timeout: 30000 #数据库连接超时时间,默认30秒，即30000
+    connection-test-query: SELECT 1
+  type: com.zaxxer.hikari.HikariDataSource
+
+
+
+# MyBatis 配置【如需使用记得打开】
+mybatis:
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+  config-location:  classpath:/mybatis/config/mybatis-config.xml
+
+# Redis
+redis:
+  sdk:
+    config:
+      host: 117.72.48.54
+      port: 16379
+      pool-size: 10
+      min-idle-size: 5
+      idle-timeout: 30000
+      connect-timeout: 5000
+      retry-attempts: 3
+      retry-interval: 1000
+      ping-interval: 60000
+      keep-alive: true
+
+rocketmq:
+  name-server: 117.72.48.54:9876
+  consumer:
+    group: xiaomi-group
+    # 一次拉取消息最大值，注意是拉取消息的最大值而非消费最大值
+    pull-batch-size: 10
+  producer:
+    # 发送同一类消息的设置为同一个group，保证唯一
+    group: xfg-group
+    # 发送消息超时时间，默认3000
+    sendMessageTimeout: 10000
+    # 发送消息失败重试次数，默认2
+    retryTimesWhenSendFailed: 2
+    # 异步消息重试次数，默认2
+    retryTimesWhenSendAsyncFailed: 2
+    # 消息最大长度，默认1024 * 1024 * 4(默认4M)
+    maxMessageSize: 4096
+    # 压缩消息阈值，默认4k(1024 * 4)
+    compressMessageBodyThreshold: 4096
+    # 是否在内部发送失败时重试另一个broker，默认false
+    retryNextServer: false
+
+dubbo:
+  application:
+    name: xiaomi
+    version: 1.0
+  registry:
+    id: nacos-registry
+    address: nacos://117.72.48.54:8848
+  protocol:
+    name: dubbo
+    port: -1
+  scan:
+    base-packages: com.xiaomi.trigger.api
+
+
+app:
+  config:
+    # 版本，方便通过接口版本升级
+    api-version: v1
+    # 跨域，开发阶段可以设置为 * 不限制
+    cross-origin: '*'
