@@ -17,7 +17,7 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://117.72.48.54:13307/company?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://127.0.0.1:13307/company?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
   hikari:
     pool-name: Retail_HikariCP
@@ -60,7 +60,7 @@ rocketmq:
     pull-batch-size: 10
   producer:
     # 发送同一类消息的设置为同一个group，保证唯一
-    group: xfg-group
+    group: xiaomi-group
     # 发送消息超时时间，默认3000
     sendMessageTimeout: 10000
     # 发送消息失败重试次数，默认2
@@ -74,18 +74,6 @@ rocketmq:
     # 是否在内部发送失败时重试另一个broker，默认false
     retryNextServer: false
 
-dubbo:
-  application:
-    name: xiaomi
-    version: 1.0
-  registry:
-    id: nacos-registry
-    address: nacos://117.72.48.54:8848
-  protocol:
-    name: dubbo
-    port: -1
-  scan:
-    base-packages: com.xiaomi.trigger.api
 
 
 app:
