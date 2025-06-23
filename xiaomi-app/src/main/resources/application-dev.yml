@@ -30,7 +30,24 @@ spring:
     connection-test-query: SELECT 1
   type: com.zaxxer.hikari.HikariDataSource
 
-
+router:
+  jdbc:
+    datasource:
+      dbCount: 2
+      tbCount: 2
+      routerKey: id
+      default: db01
+      list: db01,db02
+      db01:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://117.72.48.54:13307/USER_01?useUnicode=true
+        username: root
+        password: 123456
+      db02:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://117.72.48.54:13307/USER_02?useUnicode=true
+        username: root
+        password: 123456
 
 # MyBatis 配置【如需使用记得打开】
 mybatis:

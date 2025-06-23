@@ -55,6 +55,18 @@
 
     <dependencyManagement>
         <dependencies>
+<!--            &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.shardingsphere/shardingsphere-jdbc-core &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.apache.shardingsphere</groupId>-->
+<!--                <artifactId>shardingsphere-jdbc-core</artifactId>-->
+<!--                <version>5.4.1</version>-->
+<!--            </dependency>-->
+<!--            &lt;!&ndash; https://mvnrepository.com/artifact/org.yaml/snakeyaml &ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.yaml</groupId>-->
+<!--                <artifactId>snakeyaml</artifactId>-->
+<!--                <version>1.33</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>jakarta.json</groupId>
                 <artifactId>jakarta.json-api</artifactId>
