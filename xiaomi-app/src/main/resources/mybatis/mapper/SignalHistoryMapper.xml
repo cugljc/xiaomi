@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaomi.infrastructure.persistent.dao.SignalHistoryDao">
+
+    <resultMap id="BaseResultMap" type="com.xiaomi.infrastructure.persistent.po.SignalHistory">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="carid" property="carId" jdbcType="INTEGER"/>
+        <result column="warn_code" property="warnCode" jdbcType="TINYINT"/>
+        <result column="warn_name" property="warnName" jdbcType="VARCHAR"/>
+        <result column="warn_level" property="warnLevel" jdbcType="TINYINT"/>
+        <result column="battery_type" property="batteryType" jdbcType="VARCHAR"/>
+        <result column="signal_time" property="signalTime" jdbcType="TIMESTAMP"/>
+        <result column="signal_data" property="signalData"  jdbcType="OTHER" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.xiaomi.infrastructure.persistent.po.SignalHistory">
+        INSERT INTO signal_history
+        (carid, warn_code, warn_name, warn_level, battery_type, signal_time, signal_data)
+        VALUES
+            (#{carId,jdbcType=INTEGER},
+             #{warnCode,jdbcType=TINYINT},
+             #{warnName,jdbcType=VARCHAR},
+             #{warnLevel,jdbcType=TINYINT},
+             #{batteryType,jdbcType=VARCHAR},
+             NOW(),
+             #{signalData,jdbcType=OTHER})
+    </insert>
+
+</mapper>

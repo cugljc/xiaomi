@@ -14,6 +14,11 @@ public class Constants {
 
         public static String PRODUCT_KEY = "xiaomi_product_key_";
         public static String PRODUCT_UPDATE_KEY = "xiaomi_product_update_key_";
+
+
+        public static String BATTERY_UPDATE_KEY = "xiaomi_BATTERY_update_key_";
+        public static String BATTERY_KEY = "xiaomi_BATTERY_key_";
+        public static String BATTERY_LOCK_KEY= "xiaomi_BATTERY_lock_key_";
     }
 
 }

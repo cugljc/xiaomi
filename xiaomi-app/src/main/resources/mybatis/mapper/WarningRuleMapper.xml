@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaomi.infrastructure.persistent.dao.WarningRulesDao">
+
+    <!-- 基础ResultMap（处理NULL值） -->
+    <resultMap id="BaseResultMap" type="com.xiaomi.infrastructure.persistent.po.WarningRule">
+        <id column="id" property="id"/>
+        <result column="warn_code" property="warnId"/>
+        <result column="battery_type" property="batteryType"/>
+        <result column="warn_level" property="warnLevel"/>
+        <result column="min_val" property="minVal"
+                typeHandler="org.apache.ibatis.type.FloatTypeHandler"/>
+        <result column="max_val" property="maxVal"
+                typeHandler="org.apache.ibatis.type.FloatTypeHandler"/>
+        <result column="warn_name" property="warnName"/>
+    </resultMap>
+
+    <!-- 查询所有规则 -->
+    <select id="selectrules" resultMap="BaseResultMap">
+        SELECT
+            id, warn_code, battery_type, warn_level,
+            min_val, max_val,warn_name
+        FROM warning_rules
+    </select>
+
+</mapper>

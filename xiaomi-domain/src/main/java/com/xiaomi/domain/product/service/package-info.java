@@ -1,1 +1,0 @@
-package com.xiaomi.domain.product.service;

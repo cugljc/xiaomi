@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaomi.infrastructure.persistent.dao.BatteryWarnMessageLogDao">
+
+    <resultMap id="BaseResultMap" type="com.xiaomi.infrastructure.persistent.po.BatteryWarnMessageLog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="car_id" property="carId" jdbcType="INTEGER"/>
+        <result column="payload" property="payload" jdbcType="LONGVARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="retry_count" property="retryCount" jdbcType="INTEGER"/>
+        <result column="last_retry_time" property="lastRetryTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.xiaomi.infrastructure.persistent.po.BatteryWarnMessageLog">
+        INSERT INTO battery_warn_message_log (car_id, payload, status, retry_count,create_time)
+        VALUES (#{carId}, #{payload}, #{status}, #{retryCount}, NOW())
+    </insert>
+
+    <update id="markSuccessByCarId">
+        UPDATE battery_warn_message_log
+        SET status = 1
+        WHERE car_id = #{carId}
+    </update>
+
+    <select id="findPendingLogs" resultMap="BaseResultMap">
+        SELECT *
+        FROM battery_warn_message_log
+        WHERE status = 0
+        ORDER BY create_time ASC
+        LIMIT #{limit}
+    </select>
+
+    <update id="increaseRetryCount">
+        UPDATE battery_warn_message_log
+        SET retry_count = retry_count + 1,
+            last_retry_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaomi.infrastructure.persistent.dao.VehicleLatestSignalDao">
+
+    <resultMap id="BaseResultMap" type="com.xiaomi.infrastructure.persistent.po.VehicleLatestSignal">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="carid" property="carId" jdbcType="INTEGER"/>
+        <result column="warn_code" property="warnCode" jdbcType="TINYINT"/>
+        <result column="warn_name" property="warnName" jdbcType="VARCHAR"/>
+        <result column="warn_level" property="warnLevel" jdbcType="TINYINT"/>
+        <result column="battery_type" property="batteryType" jdbcType="VARCHAR"/>
+        <result column="signal_data" property="signalData" jdbcType="OTHER"/>
+        <result column="last_updated" property="lastUpdated" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.xiaomi.infrastructure.persistent.po.VehicleLatestSignal">
+        INSERT INTO vehicle_latest_signal
+            (carid, warn_code, warn_name, warn_level, battery_type, signal_data)
+        VALUES
+            (#{carId,jdbcType=INTEGER},
+             #{warnCode,jdbcType=TINYINT},
+             #{warnName,jdbcType=VARCHAR},
+             #{warnLevel,jdbcType=TINYINT},
+             #{batteryType,jdbcType=VARCHAR},
+             #{signalData,jdbcType=OTHER})
+    </insert>
+
+    <update id="update" parameterType="com.xiaomi.infrastructure.persistent.po.VehicleLatestSignal">
+        UPDATE vehicle_latest_signal
+        SET warn_code = #{warnCode,jdbcType=TINYINT},
+            warn_name = #{warnName,jdbcType=VARCHAR},
+            warn_level = #{warnLevel,jdbcType=TINYINT},
+            battery_type = #{batteryType,jdbcType=VARCHAR},
+            signal_data = #{signalData,jdbcType=OTHER}
+        WHERE carid = #{carId,jdbcType=INTEGER} AND warn_code = #{warnCode,jdbcType=TINYINT}
+    </update>
+
+    <select id="selectByCarId" resultMap="BaseResultMap">
+        SELECT id, carid, warn_code, warn_name, warn_level, battery_type, signal_data, last_updated
+        FROM vehicle_latest_signal
+        WHERE carid = #{carId,jdbcType=INTEGER}
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT id, carid, warn_code, warn_name, warn_level, battery_type, signal_data, last_updated
+        FROM vehicle_latest_signal
+    </select>
+
+
+</mapper>
