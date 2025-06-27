@@ -285,7 +285,7 @@ public class BatteryRepository implements IBatteryRepository {
     public List<VehicleLatestSignalEntity> findAllSignals(){
         List<VehicleLatestSignalEntity> vehicleLatestSignalEntities=new ArrayList<>();
         //遍历所有的库
-        for(int dbIdx=1;dbIdx<=dbRouterConfig.getTbCount()-2;dbIdx++){
+        for(int dbIdx=1;dbIdx<=dbRouterConfig.getDbCount()-1;dbIdx++){
             DBContextHolder.setDBKey(String.format("%02d", dbIdx));
             log.info("数据库路由 dbIdx：{} ",  dbIdx);
             List<VehicleLatestSignal> vehicleLatestSignals=vehicleLatestSignalDao.findAll();
